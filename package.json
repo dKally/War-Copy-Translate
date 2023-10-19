@@ -1,0 +1,31 @@
+{
+  "name": "war-copy-translate",
+  "productName": "WarCopyTranslate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "start-dev": "NODE_ENV=development electron .",
+    "pack": "electron-build --dir",
+    "dist": "electron-builder"
+  },
+  "author": "dKally & Deividy",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^24.3.1",
+    "electron-builder": "^24.6.3"
+  },
+  "dependencies": {
+    "path": "^0.12.7"
+  },
+  "build": {
+    "appId": "Copy",
+    "mac": {
+      "icon": "build/src/icon.png"
+    },
+    "win": {
+      "icon": "./src/icon.png"
+    }
+  }
+}
