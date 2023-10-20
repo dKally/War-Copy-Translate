@@ -6,12 +6,17 @@
     <title>Document</title>
 </head>
 <body>
-    <input class="text-input" type="text">   
-    <button class="send-text">Enviar</button>
-    <div class="texts">
 
-    </div>
-    
-    <script src="./script/script.js"></script>
+    <form id="text-form">
+        <input type="text" id="texto" placeholder="Digite um texto">
+        <button id="salvar">Salvar</button>
+        <button id="traduzir">Traduzir para Português</button>
+    </form>
+
+    <div id="texto-salvo"></div>
+
+
+    <script src="./script/renderer.js"></script>
+    <!-- <script src="./script/script.js"></script> -->
 </body>
 </html>

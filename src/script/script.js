@@ -3,7 +3,7 @@ const os = require('os')
 const fs = require('fs')
 
 
-const copyJSON = path.join(os.homedir(), 'Documentos', 'War Copy Translate.JSON')
+const copyJSON = path.join(os.homedir(), 'Documentos', 'War Copy Translate')
 const copyJSON1 = path.join(__dirname, 'teste.JSON')
 
 
