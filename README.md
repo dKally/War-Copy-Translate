@@ -1,3 +1,3 @@
 # War Copy Translate
 
-App para salvar textos e traduzir eles.
+App para salvar textos e traduzir eles
