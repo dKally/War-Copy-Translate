@@ -7,25 +7,24 @@
     <link rel="stylesheet" href="styles/style.css" type="text/css" >
     <title>War Copy Translate</title>
 
-    <style>
-    body{
-        background-image: url('fundo.png');
-    }
-    </style>
-
 </head>
 
 <body>
 
-    <form id="text-form">
-        <input type="text" id="texto" placeholder="Digite um texto">
-        <button id="salvar">Salvar</button>
-        <button id="atualizar">Atualizar</button>
-        <button id="traduzir">Traduzir para Português</button>
-    </form>
+    <div class="conteudo">
 
-    <div id="texto-salvo"></div>
-    <li id="textos"></li>
+        <form id="text-form">
+            <input type="text" id="texto" placeholder="Digite um texto">
+            <button id="salvar">Salvar</button>
+            <!-- <button id="atualizar">Atualizar</button> -->
+            <button id="traduzir">Traduzir para Português</button>
+        </form>
+    
+        <div id="texto-salvo"></div>
+        <ul id="textos"></ul>
+
+    </div>
+
 
 
     <script src="./script/renderer.js"></script>
