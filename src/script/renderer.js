@@ -5,11 +5,17 @@ const fs = require('fs')
 const textosJSON = path.join(__dirname, '..', 'textos.json')
 
 function atualizarLista(){
+    console.log('Atualizando Textos...')
+
     fs.readFile(textosJSON, 'utf8', (error, data) => {
         if (error) {
           console.error(error)
           return
         }
+
+        const divAtual = document.getElementById("textos")
+        divAtual.innerHTML = ''
+
         let objetoJson = JSON.parse(data)
         for(let i = 0;i < objetoJson.length; i++){
             let listaDeTexto = document.createElement('li')
@@ -33,23 +39,24 @@ function atualizarLista(){
             copiarTexto()
         });
           
-            let divAtual = document.getElementById("textos");
             divAtual.appendChild(listaDeTexto);    
-            divAtual.appendChild(btn);    
+            divAtual.appendChild(btn);   
+            console.log('Textos atualizados!')
+ 
         }
     })
 }
 atualizarLista()
 
-// document.getElementById('atualizar').addEventListener('click',()=>{
-//     atualizarLista()
-// })
 
 
 document.getElementById('text-form').addEventListener('submit', (e) => {
     e.preventDefault();
     const texto = document.getElementById('texto').value;
     ipcRenderer.send('salvar-texto', texto);
+    setTimeout(() => {
+        atualizarLista()
+    }, 100);
 });
 
 ipcRenderer.on('texto-salvo', (event, mensagem) => {
