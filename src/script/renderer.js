@@ -15,9 +15,14 @@ function atualizarLista(){
             let listaDeTexto = document.createElement('li')
             let conteudoNovo = document.createTextNode(jsonObject[i])
             listaDeTexto.appendChild(conteudoNovo)
+            
+            let btn = document.createElement('button')
+            
           
             let divAtual = document.getElementById("textos");
-            divAtual.appendChild(listaDeTexto);    }
+            divAtual.appendChild(listaDeTexto);    
+            divAtual.appendChild(btn);    
+        }
     })
 }
 atualizarLista()
