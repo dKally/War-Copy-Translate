@@ -10,14 +10,28 @@ function atualizarLista(){
           console.error(error)
           return
         }
-        let jsonObject = JSON.parse(data)
-        for(let i = 0;i < jsonObject.length; i++){
+        let objetoJson = JSON.parse(data)
+        for(let i = 0;i < objetoJson.length; i++){
             let listaDeTexto = document.createElement('li')
-            let conteudoNovo = document.createTextNode(jsonObject[i])
+            let conteudoNovo = document.createTextNode(objetoJson[i])
             listaDeTexto.appendChild(conteudoNovo)
             
             let btn = document.createElement('button')
             
+            btn.textContent = 'Copiar'
+
+            btn.addEventListener('click', function() {
+            console.log('Botão clicado para o item ' + i);
+
+            async function copiarTexto(){
+              await navigator.clipboard.writeText(objetoJson[i])
+              btn.innerText = 'Copiado'
+              setTimeout(() => {
+                btn.innerText = 'Copiar'
+              }, 3000);
+            }
+            copiarTexto()
+        });
           
             let divAtual = document.getElementById("textos");
             divAtual.appendChild(listaDeTexto);    
@@ -27,9 +41,9 @@ function atualizarLista(){
 }
 atualizarLista()
 
-document.getElementById('atualizar').addEventListener('click',()=>{
-    atualizarLista()
-})
+// document.getElementById('atualizar').addEventListener('click',()=>{
+//     atualizarLista()
+// })
 
 
 document.getElementById('text-form').addEventListener('submit', (e) => {
