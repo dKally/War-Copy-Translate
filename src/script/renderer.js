@@ -43,20 +43,20 @@ function atualizarLista(){
             btn.textContent = 'Copiar'
 
             btn.addEventListener('click', function() {
-            console.log('Botão clicado para o item ' + i);
+            console.log('Botão clicado para o item ' + i)
 
             async function copiarTexto(){
               await navigator.clipboard.writeText(objetoJson[i])
               btn.innerText = 'Copiado'
               setTimeout(() => {
                 btn.innerText = 'Copiar'
-              }, 3000);
+              }, 3000)
             }
             copiarTexto()
         });
           
-            divAtual.appendChild(listaDeTexto);    
-            divAtual.appendChild(btn);   
+            divAtual.appendChild(listaDeTexto)
+            divAtual.appendChild(btn)  
             console.log('Textos atualizados!')
  
         }
@@ -64,20 +64,27 @@ function atualizarLista(){
 }
 atualizarLista()
 
-
+function animaçãoAlerta(){
+  const alerta = document.querySelector('.texto-salvo')
+  alerta.classList.add('animação-mostrar')
+  alerta.classList.remove('hide')
+  setTimeout(() => {
+    alerta.classList.remove('animação-mostrar')
+    alerta.classList.add('animação-sumir')
+    setTimeout(() => {
+      alerta.classList.add('hide')
+    }, 1000);
+  }, 2000);
+}
 
 document.getElementById('text-form').addEventListener('submit', (e) => {
     e.preventDefault();
     const texto = document.getElementById('texto').value;
     ipcRenderer.send('salvar-texto', texto);
-    setTimeout(() => {
-        atualizarLista()
-    }, 100);
-});
+})
 
 ipcRenderer.on('texto-salvo', (event, mensagem) => {
-    document.getElementById('texto-salvo').textContent = mensagem
-    setTimeout(() => {
-        document.getElementById('texto-salvo').textContent = ''
-    }, 5000);
+    animaçãoAlerta()
+    atualizarLista()
 })
+
