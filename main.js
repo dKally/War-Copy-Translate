@@ -57,16 +57,16 @@ function createWindow(){
                     fs.writeFile(textosJSON, JSON.stringify(textos), (err) => {
                         if (!err) {
                             console.log('Copiado')
-                        } else {
+                            win.webContents.send('texto-salvo', 'Texto salvo com sucesso.');                        } else {
                             console.log('Deu erro')
-                        }
+                            win.webContents.send('texto-salvo', 'Erro ao salvar o texto.');                        }
                     });
                 }
             });
         } catch (error) {
             console.error('Erro ao capturar o texto da área de transferência:', error);
         }
-    });
+    })
 }
 
 app.whenReady().then(()=>{
@@ -105,9 +105,9 @@ ipcMain.on('salvar-texto', (event, texto) => {
         textos.push(texto);
         fs.writeFile(textosJSON, JSON.stringify(textos), (err) => {
             if (!err) {
-                event.sender.send('texto-salvo', 'Texto salvo com sucesso.');
+                event.sender.send('texto-salvo', 'Texto salvo com sucesso.')
             } else {
-                event.sender.send('texto-salvo', 'Erro ao salvar o texto.');
+                event.sender.send('texto-salvo', 'Erro ao salvar o texto.')
             }
         });
     });
