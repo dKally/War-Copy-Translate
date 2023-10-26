@@ -75,3 +75,50 @@ li{
     margin: 15px;
     border-top: 1px solid #fff;
 }
+
+.hide{
+    display: none;
+    opacity: 0;
+}
+
+.texto-salvo{
+    position: absolute;
+    left: -50%;
+    top: 5%;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 5px;
+    padding: 50px;
+    backdrop-filter: blur(5px);
+}
+
+.animação-mostrar{
+    opacity: 0;
+    left: -50%;
+    animation: animação-mostrar 0.3s forwards;
+}
+
+.animação-sumir{
+    opacity: 100;
+    left: 5%;
+    animation: animação-sumir 0.3s forwards;
+}
+
+@keyframes animação-sumir {
+    from{
+        opacity: 0;
+        left: 5%;
+    }to{
+        opacity: 100;
+        left: -50%;
+    }
+}
+
+@keyframes animação-mostrar {
+    from{
+        opacity: 0;
+        left: -50%;
+    }to{
+        opacity: 100;
+        left: 5%;
+    }
+}
