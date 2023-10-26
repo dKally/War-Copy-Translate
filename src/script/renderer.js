@@ -1,8 +1,24 @@
 const { ipcRenderer } = require('electron');
 const path = require('path')
-const fs = require('fs')
+const os = require('os')
+const fs = require('fs');
 
-const textosJSON = path.join(__dirname, '..', 'textos.json')
+const textosJSON = path.join(os.homedir(), 'Documentos', 'textos.json')
+
+function criarArquivos() {
+    if (!fs.existsSync(textosJSON)) {
+      fs.writeFileSync(textosJSON, '[]', 'utf-8');
+      console.log('Arquivo "textos.json" criado com um array vazio!');
+      console.log(textosJSON);
+    } else {
+      console.log('Arquivo "textos.json" já existe.');
+    }
+  }
+  
+criarArquivos();
+
+
+
 
 function atualizarLista(){
     console.log('Atualizando Textos...')
@@ -64,13 +80,4 @@ ipcRenderer.on('texto-salvo', (event, mensagem) => {
     setTimeout(() => {
         document.getElementById('texto-salvo').textContent = ''
     }, 5000);
-});
-
-document.getElementById('traduzir').addEventListener('click', () => {
-    ipcRenderer.send('traduzir-texto');
-});
-
-ipcRenderer.on('texto-traduzido', (event, textos) => {
-
-
-});
+})
