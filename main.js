@@ -1,6 +1,7 @@
 const {app, BrowserWindow, ipcMain, Menu, globalShortcut, clipboard} = require('electron')
 const path = require('path')
 const fs = require('fs')
+const os = require('os')
 
 let win
 
@@ -9,6 +10,9 @@ const isDev = process.env.NODE_ENV !== undefined && process.env.NODE_ENV === "de
 app.setName("Translate APP")
 
 let capturedClipboardText
+
+const textosJSON = path.join(os.homedir(), 'Documentos', 'textos.json')
+
 
 function createWindow(){
     win = new BrowserWindow({
@@ -45,11 +49,12 @@ function createWindow(){
             console.log('Texto da área de transferência capturado:', capturedClipboardText);
 
             // Agora você pode salvar 'capturedClipboardText' no JSON e notificar a janela renderer, se necessário
-            fs.readFile('textos.json', 'utf-8', (err, data) => {
+
+            fs.readFile(textosJSON, 'utf-8', (err, data) => {
                 if (!err) {
                     let textos = JSON.parse(data);
                     textos.push(capturedClipboardText);
-                    fs.writeFile('textos.json', JSON.stringify(textos), (err) => {
+                    fs.writeFile(textosJSON, JSON.stringify(textos), (err) => {
                         if (!err) {
                             console.log('Copiado')
                         } else {
@@ -92,29 +97,18 @@ const menuTemplate = [
 ]
 
 ipcMain.on('salvar-texto', (event, texto) => {
-    fs.readFile('textos.json', 'utf-8', (err, data) => {
+    fs.readFile(textosJSON, 'utf-8', (err, data) => {
         let textos = [];
         if (!err) {
             textos = JSON.parse(data);
         }
         textos.push(texto);
-        fs.writeFile('textos.json', JSON.stringify(textos), (err) => {
+        fs.writeFile(textosJSON, JSON.stringify(textos), (err) => {
             if (!err) {
                 event.sender.send('texto-salvo', 'Texto salvo com sucesso.');
             } else {
                 event.sender.send('texto-salvo', 'Erro ao salvar o texto.');
             }
         });
-    });
-});
-
-ipcMain.on('traduzir-texto', (event) => {
-    fs.readFile('textos.json', 'utf-8', (err, data) => {
-        if (!err) {
-            const textos = JSON.parse(data);
-            // Implemente aqui a lógica de tradução para o português
-            // e envie o texto traduzido de volta para a interface do usuário
-            event.sender.send('texto-traduzido', textos);
-        }
     });
 });
