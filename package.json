@@ -23,10 +23,10 @@
   "build": {
     "appId": "Copy",
     "mac": {
-      "icon": "build/src/icon.png"
+      "icon": "build/src/icon.jpg"
     },
     "win": {
-      "icon": "./src/icon.png"
+      "icon": "./src/icon.jpg"
     }
   }
 }
