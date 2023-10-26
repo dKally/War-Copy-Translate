@@ -17,6 +17,7 @@
     "electron-builder": "^24.6.3"
   },
   "dependencies": {
+    "os": "^0.1.2",
     "path": "^0.12.7"
   },
   "build": {
